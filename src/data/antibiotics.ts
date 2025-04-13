@@ -19,7 +19,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "ampicillin",
     name: "Ampicilina",
-    neofaxPage: 10, // Página atualizada para o PDF que temos
+    neofaxPage: 104, // Página correta do Neofax
     description: "Antibiótico beta-lactâmico de amplo espectro eficaz contra grupo B Streptococcus, Listeria monocytogenes e cepas suscetíveis de E. coli.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -76,7 +76,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "gentamicin",
     name: "Gentamicina",
-    neofaxPage: 20, // Página atualizada para o PDF que temos
+    neofaxPage: 448, // Página correta do Neofax
     description: "Antibiótico aminoglicosídeo usado para tratar infecções causadas por bactérias gram-negativas. Frequentemente utilizado em combinação com ampicilina para sepse neonatal.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -127,7 +127,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "amikacin",
     name: "Amicacina",
-    neofaxPage: 15, // Página atualizada para o PDF que temos
+    neofaxPage: 59, // Página correta do Neofax
     description: "Antibiótico aminoglicosídeo usado para tratar infecções graves por bactérias gram-negativas resistentes a outros aminoglicosídeos. Maior espectro de atividade contra Pseudomonas e outros organismos resistentes.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -191,7 +191,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "vancomycin",
     name: "Vancomicina",
-    neofaxPage: 30, // Página atualizada para o PDF que temos
+    neofaxPage: 905, // Página correta do Neofax
     description: "Antibiótico glicopeptídeo usado principalmente para infecções por bactérias gram-positivas resistentes, como Staphylococcus aureus resistente à meticilina (MRSA).",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -252,7 +252,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "cefotaxime",
     name: "Cefotaxima",
-    neofaxPage: 18, // Página atualizada para o PDF que temos
+    neofaxPage: 209, // Página correta do Neofax
     description: "Cefalosporina de terceira geração com amplo espectro contra bactérias gram-negativas e gram-positivas. Boa penetração no líquido cefalorraquidiano.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -298,7 +298,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "meropenem",
     name: "Meropenem",
-    neofaxPage: 22, // Página atualizada para o PDF que temos
+    neofaxPage: 603, // Página correta do Neofax
     description: "Antibiótico carbapenêmico de amplo espectro com atividade contra gram-positivos, gram-negativos e anaeróbios. Útil para infecções graves, incluindo infecções resistentes.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -338,7 +338,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "piperacillin_tazobactam",
     name: "Piperacilina-Tazobactam",
-    neofaxPage: 25, // Página atualizada para o PDF que temos
+    neofaxPage: 770, // Página correta do Neofax
     description: "Combinação de piperacilina (penicilina de amplo espectro) com tazobactam (inibidor de beta-lactamase). Ativo contra muitos organismos gram-positivos, gram-negativos e anaeróbios.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -369,6 +369,48 @@ export const antibiotics: Antibiotic[] = [
       const totalDosePerDay = (dosePerKg * weight * 24) / parseInt(interval.split(" ")[0]);
       notes += `Dose total diária aproximada: ${totalDosePerDay.toFixed(1)} mg/dia de piperacilina\n`;
       notes += "Útil para infecções nosocomiais e infecções por patógenos resistentes. Boa cobertura contra Pseudomonas aeruginosa.";
+
+      return { dosage, interval, notes };
+    },
+  },
+  {
+    id: "oxacillin",
+    name: "Oxacilina",
+    neofaxPage: 715, // Página correta do Neofax
+    description: "Antibiótico beta-lactâmico resistente à penicilinase, eficaz contra Staphylococcus aureus suscetíveis à meticilina e outros cocos gram-positivos.",
+    dosageCalculation: (weight, gestationalAge, postnatalAge) => {
+      let dosage: string;
+      let interval: string;
+      let notes: string = "";
+
+      // Dosagem baseada na idade gestacional e pós-natal
+      if (postnatalAge <= 7) {
+        if (gestationalAge < 34) {
+          dosage = "25 mg/kg/dose";
+          interval = "12 horas";
+        } else {
+          dosage = "25 mg/kg/dose";
+          interval = "8 horas";
+        }
+      } else {
+        if (gestationalAge < 34) {
+          dosage = "25 mg/kg/dose";
+          interval = "8 horas";
+        } else {
+          dosage = "25 mg/kg/dose";
+          interval = "6 horas";
+        }
+      }
+
+      // Para infecções graves/meningite
+      notes = "Para infecções graves ou meningite: aumentar para 50 mg/kg/dose, mantendo o mesmo intervalo.\n";
+      
+      // Cálculo da dose total
+      const dosePerKg = parseFloat(dosage.split(" ")[0]);
+      const totalDosePerDay = (dosePerKg * weight * 24) / parseInt(interval.split(" ")[0]);
+      notes += `Dose total diária aproximada: ${totalDosePerDay.toFixed(1)} mg/dia\n`;
+      notes += "Administrar por infusão intravenosa lenta durante 30 minutos.\n";
+      notes += "Útil para infecções por Staphylococcus aureus suscetíveis à meticilina, incluindo bacteremia, pneumonia, e infecções de pele e partes moles.";
 
       return { dosage, interval, notes };
     },

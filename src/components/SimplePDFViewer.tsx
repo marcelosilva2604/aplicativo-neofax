@@ -17,7 +17,9 @@ const SimplePDFViewer: React.FC<SimplePDFViewerProps> = ({ pdfPath, pageNumber =
     
     // Forçar a atualização mesmo se o iframe já estiver carregado
     if (iframeRef.current) {
-      const newSrc = `${pdfPath}#page=${pageNumber}&toolbar=1&navpanes=1&scrollbar=1&view=FitH`;
+      // Para PDFs com muitas páginas, é importante usar o parâmetro nameddest, que é mais confiável
+      // view=FitH ajusta a visualização horizontalmente
+      const newSrc = `${pdfPath}#page=${pageNumber}&toolbar=1&view=FitH&zoom=100`;
       setIframeSrc(newSrc);
       
       // Em alguns navegadores, mudar apenas o src pode não atualizar se o domínio for o mesmo
@@ -27,7 +29,7 @@ const SimplePDFViewer: React.FC<SimplePDFViewerProps> = ({ pdfPath, pageNumber =
         if (iframeRef.current) {
           iframeRef.current.src = newSrc;
         }
-      }, 50);
+      }, 100); // Aumentando o timeout para garantir que haja tempo suficiente para o carregamento
     }
   }, [pdfPath, pageNumber]);
   

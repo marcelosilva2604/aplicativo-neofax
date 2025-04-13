@@ -10,13 +10,14 @@ interface AntibioticPage {
 
 // Mapeamento correto de antibióticos para páginas no PDF
 export const antibioticPages: AntibioticPage[] = [
-  { id: "ampicillin", name: "Ampicilina", page: 10 },
-  { id: "gentamicin", name: "Gentamicina", page: 20 },
-  { id: "amikacin", name: "Amicacina", page: 15 },
-  { id: "vancomycin", name: "Vancomicina", page: 30 },
-  { id: "cefotaxime", name: "Cefotaxima", page: 18 },
-  { id: "meropenem", name: "Meropenem", page: 22 },
-  { id: "piperacillin_tazobactam", name: "Piperacilina-Tazobactam", page: 25 },
+  { id: "ampicillin", name: "Ampicilina", page: 104 },
+  { id: "gentamicin", name: "Gentamicina", page: 448 },
+  { id: "amikacin", name: "Amicacina", page: 59 },
+  { id: "vancomycin", name: "Vancomicina", page: 905 },
+  { id: "cefotaxime", name: "Cefotaxima", page: 209 },
+  { id: "meropenem", name: "Meropenem", page: 603 },
+  { id: "piperacillin_tazobactam", name: "Piperacilina-Tazobactam", page: 770 },
+  { id: "oxacillin", name: "Oxacilina", page: 715 },
 ];
 
 /**
@@ -58,9 +59,12 @@ export const validateAntibioticPages = (antibioticData: any[]): boolean => {
   return isValid;
 };
 
-export default {
+// Criar o objeto antes de exportá-lo como padrão
+const PDFHelper = {
   antibioticPages,
   getPageForAntibiotic,
   getPageForAntibioticByName,
   validateAntibioticPages
-}; 
+};
+
+export default PDFHelper; 

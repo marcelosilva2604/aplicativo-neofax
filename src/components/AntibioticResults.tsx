@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { antibiotics } from '../data/antibiotics';
 import { PatientData } from './PatientForm';
 import SimplePDFViewer from './SimplePDFViewer';
-import { getPageForAntibiotic, getPageForAntibioticByName } from '../utils/PDFHelper';
+import { getPageForAntibioticByName } from '../utils/PDFHelper';
 
 interface AntibioticResultsProps {
   patientData: PatientData;
@@ -35,7 +35,7 @@ const AntibioticResults: React.FC<AntibioticResultsProps> = ({ patientData, onRe
   const antibioticCategories: CategoryMap = {
     'all': antibiotics.map(a => a.id),
     'common': ['ampicillin', 'gentamicin', 'cefotaxime'],
-    'resistant': ['vancomycin', 'meropenem', 'piperacillin_tazobactam'],
+    'resistant': ['vancomycin', 'meropenem', 'piperacillin_tazobactam', 'oxacillin'],
     'aminoglycosides': ['gentamicin', 'amikacin']
   };
 
