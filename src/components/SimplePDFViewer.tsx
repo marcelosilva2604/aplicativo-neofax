@@ -11,10 +11,24 @@ const SimplePDFViewer: React.FC<SimplePDFViewerProps> = ({ pdfPath, pageNumber =
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeSrc, setIframeSrc] = useState(`${pdfPath}#page=${pageNumber}&toolbar=1&navpanes=1&scrollbar=1`);
   
-  // Atualizar o iframe src sempre que o número da página mudar
+  // Garantir que a URL seja atualizada quando pageNumber mudar
   useEffect(() => {
     console.log(`SimplePDFViewer: Atualizando para página ${pageNumber}`);
-    setIframeSrc(`${pdfPath}#page=${pageNumber}&toolbar=1&navpanes=1&scrollbar=1`);
+    
+    // Forçar a atualização mesmo se o iframe já estiver carregado
+    if (iframeRef.current) {
+      const newSrc = `${pdfPath}#page=${pageNumber}&toolbar=1&navpanes=1&scrollbar=1&view=FitH`;
+      setIframeSrc(newSrc);
+      
+      // Em alguns navegadores, mudar apenas o src pode não atualizar se o domínio for o mesmo
+      // Esta técnica recarrega o iframe
+      iframeRef.current.src = 'about:blank';
+      setTimeout(() => {
+        if (iframeRef.current) {
+          iframeRef.current.src = newSrc;
+        }
+      }, 50);
+    }
   }, [pdfPath, pageNumber]);
   
   useEffect(() => {

@@ -19,7 +19,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "ampicillin",
     name: "Ampicilina",
-    neofaxPage: 104, // Página correta do Neofax
+    neofaxPage: 10, // Página atualizada para o PDF que temos
     description: "Antibiótico beta-lactâmico de amplo espectro eficaz contra grupo B Streptococcus, Listeria monocytogenes e cepas suscetíveis de E. coli.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -76,7 +76,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "gentamicin",
     name: "Gentamicina",
-    neofaxPage: 400, // Tentativa aproximada (precisaria da página exata)
+    neofaxPage: 20, // Página atualizada para o PDF que temos
     description: "Antibiótico aminoglicosídeo usado para tratar infecções causadas por bactérias gram-negativas. Frequentemente utilizado em combinação com ampicilina para sepse neonatal.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -127,7 +127,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "amikacin",
     name: "Amicacina",
-    neofaxPage: 59, // Página correta do Neofax
+    neofaxPage: 15, // Página atualizada para o PDF que temos
     description: "Antibiótico aminoglicosídeo usado para tratar infecções graves por bactérias gram-negativas resistentes a outros aminoglicosídeos. Maior espectro de atividade contra Pseudomonas e outros organismos resistentes.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -191,7 +191,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "vancomycin",
     name: "Vancomicina",
-    neofaxPage: 898, // Página correta do Neofax
+    neofaxPage: 30, // Página atualizada para o PDF que temos
     description: "Antibiótico glicopeptídeo usado principalmente para infecções por bactérias gram-positivas resistentes, como Staphylococcus aureus resistente à meticilina (MRSA).",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -252,7 +252,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "cefotaxime",
     name: "Cefotaxima",
-    neofaxPage: 209, // Página aproximada do Neofax
+    neofaxPage: 18, // Página atualizada para o PDF que temos
     description: "Cefalosporina de terceira geração com amplo espectro contra bactérias gram-negativas e gram-positivas. Boa penetração no líquido cefalorraquidiano.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -298,7 +298,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "meropenem",
     name: "Meropenem",
-    neofaxPage: 550, // Página aproximada do Neofax
+    neofaxPage: 22, // Página atualizada para o PDF que temos
     description: "Antibiótico carbapenêmico de amplo espectro com atividade contra gram-positivos, gram-negativos e anaeróbios. Útil para infecções graves, incluindo infecções resistentes.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;
@@ -338,7 +338,7 @@ export const antibiotics: Antibiotic[] = [
   {
     id: "piperacillin_tazobactam",
     name: "Piperacilina-Tazobactam",
-    neofaxPage: 770, // Página aproximada do Neofax
+    neofaxPage: 25, // Página atualizada para o PDF que temos
     description: "Combinação de piperacilina (penicilina de amplo espectro) com tazobactam (inibidor de beta-lactamase). Ativo contra muitos organismos gram-positivos, gram-negativos e anaeróbios.",
     dosageCalculation: (weight, gestationalAge, postnatalAge) => {
       let dosage: string;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { antibiotics } from '../data/antibiotics';
 import { PatientData } from './PatientForm';
 import SimplePDFViewer from './SimplePDFViewer';
+import { getPageForAntibiotic, getPageForAntibioticByName } from '../utils/PDFHelper';
 
 interface AntibioticResultsProps {
   patientData: PatientData;
@@ -49,16 +50,12 @@ const AntibioticResults: React.FC<AntibioticResultsProps> = ({ patientData, onRe
   // Função para abrir o modal com as informações do antibiótico
   const openReferenceModal = (name: string, page: number) => {
     console.log(`Abrindo referência para: ${name}, página: ${page}`);
-    // Apenas para debugging - verificando todos os antibióticos
-    const antibiotic = antibiotics.find(a => a.name === name);
-    if (antibiotic) {
-      console.log(`Antibiótico encontrado: ${antibiotic.name}, página Neofax: ${antibiotic.neofaxPage}`);
-      // Usar a página do objeto antibiótico para garantir consistência
-      setSelectedAntibiotic({ name, page: antibiotic.neofaxPage });
-    } else {
-      console.log(`Antibiótico não encontrado: ${name}`);
-      setSelectedAntibiotic({ name, page });
-    }
+    
+    // Usar a função utilitária para obter a página correta
+    const correctPage = getPageForAntibioticByName(name);
+    console.log(`Página correta para ${name}: ${correctPage}`);
+    
+    setSelectedAntibiotic({ name, page: correctPage });
     setPdfKey(prevKey => prevKey + 1); // Força o componente a renderizar novamente
   };
 
@@ -253,7 +250,7 @@ const AntibioticResults: React.FC<AntibioticResultsProps> = ({ patientData, onRe
                             className="ms-2 btn btn-link btn-sm p-0 text-decoration-none"
                             data-bs-toggle="modal" 
                             data-bs-target="#neofaxReferenceModal"
-                            onClick={() => openReferenceModal(antibiotic.name, antibiotic.neofaxPage)}
+                            onClick={() => openReferenceModal(antibiotic.name, 0)}
                           >
                             <i className="bi bi-eye me-1"></i>
                             Ver Referência
